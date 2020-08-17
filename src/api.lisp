@@ -39,12 +39,12 @@
 (defstruct (path (:constructor  add-path)
 		 (:print-object print-path))
 
-  (type            ""  :type string               :read-only false)
-  (path            ""  :type string               :read-only false)
-  (name            ""  :type string               :read-only false)
-  (description-ru  ""  :type string               :read-only false)
-  (description-en  ""  :type string               :read-only false)
-  (include         ""  :type path-include-list    :read-only false))
+  (type            ""  :type string               :read-only true)
+  (path            ""  :type string               :read-only true)
+  (name            ""  :type string               :read-only true)
+  (description-ru  ""  :type string               :read-only true)
+  (description-en  ""  :type string               :read-only true)
+  (include         ""  :type path-include-list    :read-only true))
 
 
 (defun print-path (path stream)
