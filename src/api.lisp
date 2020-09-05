@@ -51,16 +51,18 @@
   (cond ((equal *ui-mode* 'text-mode) (print-path-text path stream))))
 
 
+;;; Рефакторинг всего кода
+;;; Постройка модели в рабочем журнале проекта
 
-
-(defmacro check-path (str)
+(defmacro request-path (str)
   `(ignore-errors
     (let* ((var  (read-from-string (concatenate 'string "*" ,str "*")))
-	   (path (eval var))))
-    (cond ((path-p path) path)
-	  (t (format t " * ~A~%" *error-search-message*)))))
+	   (path (eval var)))
+      (if (path-p path)
+	  (format t "~%~A~2%" path)
+	  (cond ((equal *ui-mode* 'text-mode) (format t " * ~A~%" *error-search-message*)))))))
 
-(defun
+
 
 
 (defun main ()
@@ -83,6 +85,6 @@
 	 (help     (print-help))
 	 (language (set-language))
 	 (quit     (abort))
-	 (otherwise (cond ((equal #\/ (char in-search 0)) (check-path in-search))
+	 (otherwise (cond ((equal #\/ (char in-search 0)) (request-path in-search))
 			  ((format t " * ~A~%" *error-command-message*)))))
        (go :shell))))
