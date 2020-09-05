@@ -54,12 +54,13 @@
 
 
 (defmacro check-path (str)
-  `(let* ((var  (read-from-string (concatenate 'string "*" ,str "*")))
-	  (path (ignore-errors (eval var))))
-     (cond ((path-p path) (format t "~%~A~2%" path))
-	   (t (format t " * ~A~%" *error-search-message*)))))
+  `(ignore-errors
+    (let* ((var  (read-from-string (concatenate 'string "*" ,str "*")))
+	   (path (eval var))))
+    (cond ((path-p path) path)
+	  (t (format t " * ~A~%" *error-search-message*)))))
 
-
+(defun
 
 
 (defun main ()
