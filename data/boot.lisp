@@ -3,7 +3,6 @@
 
 
 
-
 (declaim (path */template*
 	       */boot*
 	       */boot/grub*
